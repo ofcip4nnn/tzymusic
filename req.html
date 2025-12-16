@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TzyMusic • Request Music</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#a855f7;
+  --bg:#030014;
+  --glass:rgba(17,25,40,.65);
+  --border:rgba(255,255,255,.08);
+  --text:#fff;
+  --muted:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding-bottom:90px;
+}
+.grid-bg{
+  position:fixed;inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:30px 30px;
+  z-index:-1;
+}
+.container{max-width:600px;margin:auto;padding:20px}
+
+/* HEADER */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:25px;position:relative;
+}
+header h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:22px;
+  background:linear-gradient(to right,#fff,var(--primary));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+header p{font-size:12px;color:var(--muted)}
+
+/* CARD */
+.card{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:22px;margin-bottom:20px;
+}
+.card-title{
+  font-family:'Orbitron',sans-serif;
+  display:flex;gap:10px;margin-bottom:15px;
+  align-items:center;
+}
+.card-title i{
+  background:var(--primary);
+  padding:8px;
+  border-radius:8px;
+  font-size:16px;
+}
+.list-item{
+  display:flex;justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:13px;
+}
+.list-item:last-child{border-bottom:none}
+
+/* FORM */
+.request-form{
+  display:flex;flex-direction:column;gap:12px;
+}
+.request-form input, .request-form textarea{
+  padding:10px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.05);
+  color:#fff;
+  font-size:14px;
+}
+.request-form button{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:12px;
+  border-radius:12px;
+  font-size:14px;
+  cursor:pointer;
+  transition:.3s;
+}
+.request-form button:hover{
+  background:#c084fc;
+}
+
+/* BACK BUTTON */
+/* BACK BUTTON */
+.back-btn{display:inline-block;margin-bottom:15px;color:#fff;background:var(--primary);padding:10px 16px;border-radius:12px;text-decoration:none;font-size:14px;}
+.back-btn:hover{background:#fff;color:var(--primary);}
+</style>
+</head>
+
+<body>
+<div class="grid-bg"></div>
+
+<div class="container">
+<header>
+  <div>
+    <h1>TzyMusic</h1>
+    <p>Request Music Center</p>
+  </div>
+</header>
+
+<a class="back-btn" href="index.html">⬅ Kembali</a>
+
+<div class="card">
+  <div class="card-title"><i class="fa-solid fa-music"></i> Request Music</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:12px">
+    Jika ingin menambahkan lagu ke TzyMusic, silakan isi form request di bawah ini. Semua request akan dikirim ke Telegram. 
+    <br><strong>Catatan:</strong> Penambahan musik masih dilakukan secara manual oleh developer.
+  </p>
+
+  <form class="request-form" onsubmit="sendRequest(event)">
+    <input type="text" id="songName" placeholder="Nama Lagu" required>
+    <input type="text" id="artistName" placeholder="Nama Artis" required>
+    <textarea id="note" placeholder="Catatan / Link lagu (opsional)" rows="3"></textarea>
+    <button type="submit"><i class="fa-solid fa-paper-plane"></i> Kirim Request</button>
+  </form>
+</div>
+
+</div>
+
+<script>
+function sendRequest(e){
+  e.preventDefault();
+  const song=document.getElementById('songName').value;
+  const artist=document.getElementById('artistName').value;
+  const note=document.getElementById('note').value;
+
+  // Ganti ID Bot & Owner sesuai info
+  const BOT_ID='8274767277:AAEqdCcSXBpgaWpZPRe7P_SidITYU194P6U';
+  const OWNER_ID='8031744294';
+  const telegramUrl=`https://api.telegram.org/bot${BOT_ID}/sendMessage?chat_id=${OWNER_ID}&text=Request%20Music%0AJudul:%20${encodeURIComponent(song)}%0AArtis:%20${encodeURIComponent(artist)}%0ANote:%20${encodeURIComponent(note)}`;
+
+  fetch(telegramUrl)
+    .then(()=>alert('Request terkirim!'))
+    .catch(()=>alert('Gagal mengirim, silakan coba lagi.'));
+
+  document.getElementById('songName').value='';
+  document.getElementById('artistName').value='';
+  document.getElementById('note').value='';
+}
+</script>
+
+</body>
+</html>

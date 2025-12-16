@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "app_name": "TzyMusic",
+    "last_update": "2025-12-16"
+  },
+  "updates": [
+    {
+      "version": "v1.5.0",
+      "title": "Upgrade Versions Ke v1.5.0",
+      "description": "Penambahan Fitur Baru.",
+      "date": "16 Des 2025",
+      "type": "major",
+      "changes": [
+        "Penambahan Info Aplikasi/Settings",
+        "Optimalisasi tampilan mobile",
+        "Pembuatan Aplikasi Mobile, Link Di Info Aplikasi"
+      ]
+    },
+    {
+      "version": "v1.0.0",
+      "title": "Upgrade Versions Ke v1.0.0",
+      "description": "Pembuatan Websites/Awal Dibkin.",
+      "date": "15 Des 2025",
+      "type": "minor",
+      "changes": [
+        "Penambahan Music agar user bisa mendengarkan music",
+        "Fixed Agar Website Bisa dipakai"
+      ]
+    }
+  ]
+}
